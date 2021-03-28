@@ -13,8 +13,8 @@ public class Chess {
     }
 
     private void play() {
-        Player hp = new HumanPlayer(Player.BLACK, board);
-        Player ap = new AIPlayer(Player.WHITE, board);
+        Player hp = new HumanPlayer(Player.WHITE, board);
+        Player ap = new AIPlayer(Player.BLACK, board);
 
         while (true) {
             board.print();

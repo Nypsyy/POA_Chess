@@ -4,8 +4,11 @@ import agent.Move;
 import agent.Player;
 
 public class Pawn extends Piece {
+    public boolean firstMove;
+
     public Pawn(int player) {
         super(player);
+        firstMove = true;
     }
 
     @Override

@@ -4,8 +4,6 @@ import agent.Move;
 import agent.Player;
 import piece.*;
 
-import java.util.Arrays;
-
 public class Board {
     private Spot[][] grid;
 
@@ -24,29 +22,29 @@ public class Board {
 
     public void setupChessBoard() {
         for (int i = 0; i < SIZE; i++) {
-            grid[i][1].setPiece(new Pawn(Player.WHITE));
-            grid[i][6].setPiece(new Pawn(Player.BLACK));
+            grid[i][1].setPiece(new Pawn(Player.BLACK));
+            grid[i][6].setPiece(new Pawn(Player.WHITE));
         }
 
         for (int i = 2; i < SIZE; i += 3) {
-            grid[i][0].setPiece(new Bishop(Player.WHITE));
-            grid[i][7].setPiece(new Bishop(Player.BLACK));
+            grid[i][0].setPiece(new Bishop(Player.BLACK));
+            grid[i][7].setPiece(new Bishop(Player.WHITE));
         }
 
         for (int i = 1; i < SIZE; i += 5) {
-            grid[i][0].setPiece(new Knight(Player.WHITE));
-            grid[i][7].setPiece(new Knight(Player.BLACK));
+            grid[i][0].setPiece(new Knight(Player.BLACK));
+            grid[i][7].setPiece(new Knight(Player.WHITE));
         }
         for (int i = 0; i < SIZE; i += 7) {
-            grid[i][0].setPiece(new Rook(Player.WHITE));
-            grid[i][7].setPiece(new Rook(Player.BLACK));
+            grid[i][0].setPiece(new Rook(Player.BLACK));
+            grid[i][7].setPiece(new Rook(Player.WHITE));
         }
 
-        grid[3][0].setPiece(new Queen(Player.WHITE));
-        grid[3][7].setPiece(new Queen(Player.BLACK));
+        grid[3][0].setPiece(new Queen(Player.BLACK));
+        grid[3][7].setPiece(new Queen(Player.WHITE));
 
-        grid[4][0].setPiece(new King(Player.WHITE));
-        grid[4][7].setPiece(new King(Player.BLACK));
+        grid[4][0].setPiece(new King(Player.BLACK));
+        grid[4][7].setPiece(new King(Player.WHITE));
     }
 
     public void movePiece(Move mv) {
