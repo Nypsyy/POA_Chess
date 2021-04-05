@@ -35,7 +35,6 @@ public aspect Validation {
         System.out.println("Validation du déplacement");
         Player p = (Player) thisJoinPoint.getTarget();
         Board board = p.playGround;
-        Piece selectedPiece = board.getGrid()[mv.xI][mv.yI].getPiece();
 
         // Pour un mouvement null
         if (mv == null) {
@@ -57,13 +56,16 @@ public aspect Validation {
             System.out.println("Case inoccupée.");
             return false;
         }
+
+		Piece selectedPiece = board.getGrid()[mv.xI][mv.yI].getPiece();
+
         // Vérifie que la pièce appartienne au joueur
-        if (board.getGrid()[mv.xI][mv.yI].getPiece().getPlayer() != p.getColor()) {
+        if (selectedPiece.getPlayer() != p.getColor()) {
             System.out.println("Cette pièce ne vous appartient pas.");
             return false;
         }
         // Si le mouvement est autorisé par la pièce
-        if (!board.getGrid()[mv.xI][mv.yI].getPiece().isMoveLegal(mv)) {
+        if (!selectedPiece.isMoveLegal(mv)) {
             System.out.println("Mouvement non autorisé.");
             return false;
         }
@@ -112,7 +114,7 @@ public aspect Validation {
                 return false;
             }
 
-            // Si le mouvement est correct et qu'il s'agit du permier coup pour ce pion, mettre à jour son statut
+            // Si le mouvement est correct et qu'il s'agit du premier coup pour ce pion, mettre à jour son statut
             if (((Pawn) selectedPiece).firstMove)
                 ((Pawn) selectedPiece).firstMove = false;
         }
