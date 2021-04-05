@@ -8,30 +8,38 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public aspect Logging {
-    pointcut Logging(): call(Move Player+.makeMove());
-    pointcut CleanLogging(): call(Chess.new());
+    pointcut OnMove(): call(Move Player+.makeMove());
+    pointcut Cleaning(): call(Chess.new());
 
-    after(Player player) returning(Move mv): Logging() && target(player) {
+    // Après l'exécution de la méthode Player.makeMove() pour sauvegarder le coup joué
+    after(Player player) returning(Move mv): OnMove() && target(player) {
         System.out.println("Logging()");
         PrintWriter printWriter;
         try {
+            // Initialise le fichier de log pour enregistrer le coup
             printWriter = new PrintWriter(new FileWriter("logging.txt", true));
         } catch (IOException e) {
+            // Erreur lors de l'ouverture
             System.out.println("Erreur lors de l'ouverture du fichier de sortie.");
             return;
         }
+        // Ajout d'une nouvelle ligne au fichier avec le coup joué
         printWriter.println("Coup du joueur " + (player.getColor() == 0 ? "IA" : "Humain") + " en " + mv.toString());
+        // Fermeture du fichier
         printWriter.close();
     }
 
-    before(): CleanLogging() {
+    // Avant l'appel au constructeur de la classe Chess pour intercepter le début d'une partie
+    before(): Cleaning() {
         System.out.println("Pion blanc (joueur Humain) en bas");
         System.out.println("Pion noir (joueur IA) en haut");
 
         System.out.println("CleanLogging()");
         try {
+            // Ouvre et ferme le fichier de log pour le nettoyer en début de partie
             new PrintWriter("logging.txt").close();
         } catch (FileNotFoundException e) {
+            // Erreur lors de l'ouverture
             System.out.println("Erreur lors de l'ouverture du fichier de sortie.");
             return;
         }
