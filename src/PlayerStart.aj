@@ -12,7 +12,7 @@ public aspect PlayerStart {
 
 	// Englobe l'appel à la méthode Chess.play() pour éditer la couleur des joueurs et ajouter une condition de fin
 	void around(): UpdatePlayerColor() {
-		System.out.println("UpdatePlayerColor()");
+		System.out.println("Lancement de la boucle de jeu");
 		Chess chess = (Chess) thisJoinPoint.getTarget();
 		Board board = chess.getBoard();
 
@@ -59,7 +59,7 @@ public aspect PlayerStart {
 
 	// Englobe l'appel à la méthode Board.setupChessBoard pour changer la position initiale des pièces
 	void around(): UpdateChessBoard() {
-		System.out.println("UpdateChessBoard()");
+		System.out.println("Initialisation du plateau");
 		Board board = (Board) thisJoinPoint.getTarget();
 		Spot[][] grid = board.getGrid();
 

@@ -13,7 +13,7 @@ public aspect Logging {
 
     // Après l'exécution de la méthode Player.makeMove() pour sauvegarder le coup joué
     after(Player player) returning(Move mv): OnMove() && target(player) {
-        System.out.println("Logging()");
+        System.out.println("Sauvegarde du coup du joueur " + (player.getColor() == 0 ? "IA" : "Humain") + " en " + mv.toString());
         PrintWriter printWriter;
         try {
             // Initialise le fichier de log pour enregistrer le coup
@@ -34,7 +34,7 @@ public aspect Logging {
         System.out.println("Pion blanc (joueur Humain) en bas");
         System.out.println("Pion noir (joueur IA) en haut");
 
-        System.out.println("CleanLogging()");
+        System.out.println("Nettoyage des logs");
         try {
             // Ouvre et ferme le fichier de log pour le nettoyer en début de partie
             new PrintWriter("logging.txt").close();

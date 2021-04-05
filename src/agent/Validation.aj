@@ -10,7 +10,7 @@ public aspect Validation {
 
 	// Englobe l'appel à la méthode Pawn.isMoveLegal pour éditer les mouvements autorisés par le pion
 	boolean around(Move mv): IsPawnMoveLegal() && args(mv) {
-		System.out.println("IsPawnMoveLegal()");
+		System.out.println("Vérification du pion");
 		Pawn p = (Pawn) thisJoinPoint.getTarget();
 		boolean valid = false;
 
@@ -35,7 +35,7 @@ public aspect Validation {
 
 	// Englobe l'appel à la méthode Player.makeMove pour ajouter des règles de déplacement
 	boolean around(Move mv): MoveValidation() && args(mv) {
-		System.out.println("MoveValidation()");
+		System.out.println("Validation du déplacement");
 		Player p = (Player) thisJoinPoint.getTarget();
 		Board board = p.playGround;
 
