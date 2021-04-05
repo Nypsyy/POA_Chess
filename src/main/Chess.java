@@ -1,29 +1,20 @@
 package main;
 
-import agent.AIPlayer;
+import agent.AiPlayer;
 import agent.HumanPlayer;
+import agent.Move;
 import agent.Player;
 
 public class Chess {
+
     protected Board board;
 
     public Chess() {
+
         board = new Board();
         board.setupChessBoard();
+
     }
-
-    private void play() {
-        Player hp = new HumanPlayer(Player.WHITE, board);
-        Player ap = new AIPlayer(Player.BLACK, board);
-
-        while (true) {
-            board.print();
-            hp.makeMove();
-            board.print();
-            ap.makeMove();
-        }
-    }
-
 
     public Board getBoard() {
         return board;
@@ -31,6 +22,20 @@ public class Chess {
 
     public void setBoard(Board board) {
         this.board = board;
+    }
+
+
+
+    private void play() {
+        Player hp = new HumanPlayer(Player.BLACK, board);
+        Player ap = new AiPlayer(Player.WHITE, board);
+
+        while (true){
+            board.print();
+            hp.makeMove();
+            board.print();
+            ap.makeMove();
+        }
     }
 
     public static void main(String[] args) {

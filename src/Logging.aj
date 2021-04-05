@@ -1,13 +1,18 @@
+import agent.Move;
+import agent.Player;
+import main.Chess;
+
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 public aspect Logging {
-    pointcut Logging(): call(agent.Move agent.Player+.makeMove());
-    pointcut CleanLogging(): call(void main.Chess.play());
+    pointcut Logging(): call(Move Player+.makeMove());
+    pointcut CleanLogging(): call(Chess.new());
 
-    after(agent.Player player) returning(agent.Move mv): Logging() && target(player) {
+    after(Player player) returning(Move mv): Logging() && target(player) {
+        System.out.println("Logging()");
         PrintWriter printWriter;
         try {
             printWriter = new PrintWriter(new FileWriter("logging.txt", true));
@@ -20,6 +25,10 @@ public aspect Logging {
     }
 
     before(): CleanLogging() {
+        System.out.println("Pion blanc (joueur Humain) en bas");
+        System.out.println("Pion noir (joueur IA) en haut");
+
+        System.out.println("CleanLogging()");
         try {
             new PrintWriter("logging.txt").close();
         } catch (FileNotFoundException e) {

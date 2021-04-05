@@ -4,22 +4,24 @@ import agent.Move;
 import agent.Player;
 
 public class Knight extends Piece {
+
     public Knight(int player) {
         super(player);
     }
 
     @Override
-    public boolean isMoveLegal(Move mv) {
-        if (Math.abs(mv.xI - mv.xF) == 2f)
-            return Math.abs(mv.yI - mv.yF) == 1f;
-        else if (Math.abs(mv.xI - mv.xF) == 1f)
-            return Math.abs(mv.yI - mv.yF) == 2f;
-
-        return false;
+    public String toString() {
+        return ((this.player == Player.WHITE) ? "C" : "c");
     }
 
     @Override
-    public String toString() {
-        return player == Player.WHITE ? "C" : "c";
+    public boolean isMoveLegal(Move mv) {
+        // TODO Auto-generated method stub
+        if (Math.abs(mv.xI - mv.xF) == 2) {
+            return Math.abs((mv.yI - mv.yF)) == 1;
+        } else if (Math.abs(mv.xI - mv.xF) == 1) {
+            return Math.abs((mv.yI - mv.yF)) == 2;
+        }
+        return false;
     }
 }

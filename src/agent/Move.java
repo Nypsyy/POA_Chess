@@ -4,14 +4,13 @@ public class Move {
     public int xI, xF, yI, yF;
 
     public Move(int x0, int y0, int x1, int y1) {
-        xI = x0;
-        xF = x1;
-        yI = y0;
-        yF = y1;
+        this.xI = x0;
+        this.xF = x1;
+        this.yI = y0;
+        this.yF = y1;
     }
 
-    @Override
     public String toString() {
-        return (char) ('a' + xI) + "" + yI + (char) ('a' + xF) + "" + yF;
+        return (char)('a' + xI) + "" + yI + (char)('a' + xF) + "" + yF;
     }
 }
