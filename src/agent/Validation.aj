@@ -22,7 +22,7 @@ public aspect Validation {
             // Le déplacement sera valide s'il avance de 1 à 2 cases ou s'il se déplace d'une case en diagonale
             if (p.firstMove)
                 valid = (Math.abs(mv.yF - mv.yI) < 3 && mv.xF - mv.xI == 0) || (Math.abs(mv.yF - mv.yI) == 1 && Math.abs(mv.xF - mv.xI) <= 1);
-                // Le déplacement sera valide s'il avance de 1 case ou s'il se déplace d'une case en diagonale
+            // Le déplacement sera valide s'il avance de 1 case ou s'il se déplace d'une case en diagonale
             else
                 valid = Math.abs(mv.yF - mv.yI) == 1 && Math.abs(mv.xF - mv.xI) <= 1;
         }
@@ -108,7 +108,7 @@ public aspect Validation {
             if (board.getGrid()[mv.xF][mv.yF].isOccupied() && mv.xF == mv.xI) {
                 System.out.println("Le pion est bloqué par une autre pièce !");
                 return false;
-                // Si le pion avance en diagonale mais qu'il n'y a aucun autre pion adverse
+            // Si le pion avance en diagonale mais qu'il n'y a aucun autre pion adverse
             } else if (!board.getGrid()[mv.xF][mv.yF].isOccupied() && mv.xF != mv.xI) {
                 System.out.println("Le pion ne mange personne !");
                 return false;
